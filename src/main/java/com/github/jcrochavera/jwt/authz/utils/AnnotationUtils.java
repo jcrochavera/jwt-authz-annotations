@@ -1,4 +1,4 @@
-package com.jcrochavera.jwt.authz.utils;
+package com.github.jcrochavera.jwt.authz.utils;
 
 import java.lang.annotation.Annotation;
 

@@ -1,9 +1,10 @@
-package com.jcrochavera.jwt.authz.boundary;
+package com.github.jcrochavera.jwt.authz.boundary;
 
-import com.jcrochavera.jwt.authz.annotations.RequiresPermissions;
-import com.jcrochavera.jwt.authz.utils.AnnotationUtils;
-import com.jcrochavera.jwt.authz.utils.Permission;
+import com.github.jcrochavera.jwt.authz.annotations.RequiresPermissions;
+import com.github.jcrochavera.jwt.authz.utils.AnnotationUtils;
+import com.github.jcrochavera.jwt.authz.utils.Permission;
 import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -21,8 +22,8 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 import java.lang.reflect.Method;
 
-import static com.jcrochavera.jwt.authz.control.UserSessionTest.addResource;
-import static com.jcrochavera.jwt.authz.control.UserSessionTest.addScopes;
+import static com.github.jcrochavera.jwt.authz.control.UserSessionTest.addResource;
+import static com.github.jcrochavera.jwt.authz.control.UserSessionTest.addScopes;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -58,7 +59,7 @@ public class AuthorizationFilterTest {
         af.filter(containerRequestContext);
 
         AnnotationUtils an = new AnnotationUtils(openEndpoint.getAnnotations());
-        assertThat(an.getAnnotation(RequiresPermissions.class), nullValue());
+        MatcherAssert.assertThat(an.getAnnotation(RequiresPermissions.class), nullValue());
         assertThat(an.getAnnotation(RolesAllowed.class), nullValue());
 
         assertThat(af.clientAuth.getPrincipal(), nullValue());
@@ -132,8 +133,8 @@ public class AuthorizationFilterTest {
 
         assertThat(af.clientAuth.getPrincipal(), notNullValue());
         assertThat(af.clientAuth.getSession(), notNullValue());
-        assertThat(af.clientAuth.getSession().getResources().size(), is(IsEqual.equalTo(0)));
-        assertThat(af.clientAuth.getSession().getInstances("dummy").size(), is(IsEqual.equalTo(0)));
+        MatcherAssert.assertThat(af.clientAuth.getSession().getResources().size(), is(IsEqual.equalTo(0)));
+        MatcherAssert.assertThat(af.clientAuth.getSession().getInstances("dummy").size(), is(IsEqual.equalTo(0)));
     }
 
     @Test(expected = ForbiddenException.class)
@@ -208,7 +209,7 @@ public class AuthorizationFilterTest {
 
         assertThat(af.clientAuth.getPrincipal(), notNullValue());
         assertThat(af.clientAuth.getSession(), notNullValue());
-        assertThat(af.clientAuth.getSession()
+        MatcherAssert.assertThat(af.clientAuth.getSession()
                 .hasInstancePermissions(resourceName, "2", Permission.READ, Permission.EXECUTE,
                         Permission.PRINT, Permission.UPDATE), is(IsEqual.equalTo(true)));
 
@@ -266,7 +267,7 @@ public class AuthorizationFilterTest {
 
         assertThat(af.clientAuth.getPrincipal(), notNullValue());
         assertThat(af.clientAuth.getSession(), notNullValue());
-        assertThat(af.clientAuth.getSession()
+        MatcherAssert.assertThat(af.clientAuth.getSession()
                 .hasPermissions(resourceName, Permission.INSERT, Permission.UPDATE,
                         Permission.DELETE, Permission.ARCHIVE), is(IsEqual.equalTo(true)));
     }
@@ -315,10 +316,10 @@ public class AuthorizationFilterTest {
 
         assertThat(af.clientAuth.getPrincipal(), notNullValue());
         assertThat(af.clientAuth.getSession(), notNullValue());
-        assertThat(af.clientAuth.getSession()
+        MatcherAssert.assertThat(af.clientAuth.getSession()
                 .hasInstancePermissions(resourceName1, "2", Permission.READ, Permission.EXECUTE,
                         Permission.PRINT, Permission.UPDATE), is(IsEqual.equalTo(true)));
-        assertThat(af.clientAuth.getSession()
+        MatcherAssert.assertThat(af.clientAuth.getSession()
                 .hasInstancePermissions(resourceName1, "3", Permission.INSERT, Permission.UPDATE,
                         Permission.DELETE, Permission.ARCHIVE), is(IsEqual.equalTo(false)));
     }

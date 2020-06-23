@@ -1,6 +1,7 @@
-package com.jcrochavera.jwt.authz.control;
+package com.github.jcrochavera.jwt.authz.control;
 
-import com.jcrochavera.jwt.authz.annotations.Operation;
+import com.github.jcrochavera.jwt.authz.annotations.Operation;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
@@ -122,7 +123,7 @@ public class UserSessionTest {
         assertThat(session.resourcePermissions.size(), is(IsEqual.equalTo(2)));
         assertThat(session.instancePermissions.size(), is(IsEqual.equalTo(0)));
         assertThat(session.hasPermissions(resourceName1, "r", "x"), is(IsEqual.equalTo(true)));
-        assertThat(session.hasPermissions(resourceName2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
+        MatcherAssert.assertThat(session.hasPermissions(resourceName2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
 
         assertThat(session.getResources().size(), is(IsEqual.equalTo(2)));
         assertThat(session.getInstances(resourceName1).size(), is(IsEqual.equalTo(0)));
@@ -150,15 +151,15 @@ public class UserSessionTest {
         assertThat(session.resourcePermissions.size(), is(IsEqual.equalTo(2)));
         assertThat(session.instancePermissions.size(), is(IsEqual.equalTo(2)));
         assertThat(session.hasPermissions(resourceName1, "r", "x"), is(IsEqual.equalTo(true)));
-        assertThat(session.hasPermissions(resourceName2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
+        MatcherAssert.assertThat(session.hasPermissions(resourceName2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
 
         assertThat(session.getResources().size(), is(IsEqual.equalTo(2)));
         assertThat(session.getInstances(resourceName1).size(), is(IsEqual.equalTo(1)));
         assertThat(session.getInstances(resourceName2).size(), is(IsEqual.equalTo(1)));
 
         assertThat(session.hasInstancePermissions(resourceName1, instanceValue1, "r", "x"), is(IsEqual.equalTo(true)));
-        assertThat(session.hasInstancePermissions(resourceName2, instanceValue2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
-        assertThat(session.hasInstancePermissions(resourceName2, instanceValue2, Operation.OR, "d"), is(IsEqual.equalTo(false)));
+        MatcherAssert.assertThat(session.hasInstancePermissions(resourceName2, instanceValue2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
+        MatcherAssert.assertThat(session.hasInstancePermissions(resourceName2, instanceValue2, Operation.OR, "d"), is(IsEqual.equalTo(false)));
     }
 
     @Test
@@ -188,15 +189,15 @@ public class UserSessionTest {
         assertThat(session.resourcePermissions.size(), is(IsEqual.equalTo(2)));
         assertThat(session.instancePermissions.size(), is(IsEqual.equalTo(3)));
         assertThat(session.hasPermissions(resourceName1, "r", "x"), is(IsEqual.equalTo(true)));
-        assertThat(session.hasPermissions(resourceName2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
+        MatcherAssert.assertThat(session.hasPermissions(resourceName2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
 
         assertThat(session.getResources().size(), is(IsEqual.equalTo(2)));
         assertThat(session.getInstances(resourceName1).size(), is(IsEqual.equalTo(2)));
         assertThat(session.getInstances(resourceName2).size(), is(IsEqual.equalTo(1)));
 
         assertThat(session.hasInstancePermissions(resourceName1, instanceValue1, "r", "x"), is(IsEqual.equalTo(true)));
-        assertThat(session.hasInstancePermissions(resourceName2, instanceValue2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
-        assertThat(session.hasInstancePermissions(resourceName2, instanceValue2, Operation.OR, "d"), is(IsEqual.equalTo(false)));
+        MatcherAssert.assertThat(session.hasInstancePermissions(resourceName2, instanceValue2, Operation.OR, "i", "u", "p"), is(IsEqual.equalTo(true)));
+        MatcherAssert.assertThat(session.hasInstancePermissions(resourceName2, instanceValue2, Operation.OR, "d"), is(IsEqual.equalTo(false)));
 
         assertThat(session.hasInstancePermissions(resourceSharedName1, instanceSharedValue1, "a"), is(IsEqual.equalTo(true)));
         assertThat(session.hasInstancePermissions(resourceName1, instanceSharedValue1, "a"), is(IsEqual.equalTo(true)));

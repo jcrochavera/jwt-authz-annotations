@@ -1,4 +1,4 @@
-package com.jcrochavera.jwt.authz.utils;
+package com.github.jcrochavera.jwt.authz.utils;
 
 /**
  * Created by julio.rocha on 21/6/19.

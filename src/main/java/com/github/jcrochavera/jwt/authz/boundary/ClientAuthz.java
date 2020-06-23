@@ -1,6 +1,6 @@
-package com.jcrochavera.jwt.authz.boundary;
+package com.github.jcrochavera.jwt.authz.boundary;
 
-import com.jcrochavera.jwt.authz.control.UserSession;
+import com.github.jcrochavera.jwt.authz.control.UserSession;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 /**

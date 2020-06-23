@@ -1,6 +1,6 @@
-package com.jcrochavera.jwt.authz.control;
+package com.github.jcrochavera.jwt.authz.control;
 
-import com.jcrochavera.jwt.authz.annotations.Operation;
+import com.github.jcrochavera.jwt.authz.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

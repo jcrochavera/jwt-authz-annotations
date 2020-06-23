@@ -5,8 +5,8 @@ The main purpose of this library is to extend the MP-JWT specification using res
 ### ClientAuthz
 ClientAuthz must be implemented with your required information. Example:
 ```
-import com.jcrochavera.jwt.authz.control.UserSession;
-import com.jcrochavera.jwt.authz.control.UserSessionExtended;
+import UserSession;
+import UserSessionExtended;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
@@ -149,11 +149,11 @@ There are two formats for the resource:
 ```
 Once you have your custom ClientAuth implementation (also your resources in the right format), you can use roles and authorization resource annotations
 ```
-import com.jcrochavera.jwt.authz.annotations.Operation;
-import com.jcrochavera.jwt.authz.annotations.RequiresPermission;
-import com.jcrochavera.jwt.authz.annotations.RequiresPermissions;
-import com.jcrochavera.jwt.authz.utils.BasicRoles;
-import com.jcrochavera.jwt.authz.utils.Permission;
+import Operation;
+import RequiresPermission;
+import RequiresPermissions;
+import BasicRoles;
+import Permission;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;

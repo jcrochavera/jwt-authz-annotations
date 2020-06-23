@@ -1,4 +1,4 @@
-package com.jcrochavera.jwt.authz.control;
+package com.github.jcrochavera.jwt.authz.control;
 
 import javax.json.JsonObject;
 import java.util.Objects;

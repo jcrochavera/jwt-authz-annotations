@@ -1,4 +1,6 @@
-package com.jcrochavera.jwt.authz.annotations;
+package com.github.jcrochavera.jwt.authz.annotations;
+
+import com.github.jcrochavera.jwt.authz.control.UserSession;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * Created by julio.rocha on 21/6/19.
  * <p>
- * Requires that {@link com.jcrochavera.jwt.authz.control.UserSession} has certain permissions
+ * Requires that {@link UserSession} has certain permissions
  * in a resource or a resource with instance in order to executed a method.
  * </p>
  * <p>
@@ -29,9 +31,9 @@ public @interface RequiresPermission {
     /**
      * <p>The defined resource under test</p>
      * <ul>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermission(String, String)}</li>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermissions(String, String...)}</li>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermissions(String, Operation, String...)}</li>
+     * <li>{@link UserSession#hasPermission(String, String)}</li>
+     * <li>{@link UserSession#hasPermissions(String, String...)}</li>
+     * <li>{@link UserSession#hasPermissions(String, Operation, String...)}</li>
      * </ul>
      * <p>
      * In order to check resources permissions
@@ -44,9 +46,9 @@ public @interface RequiresPermission {
     /**
      * <p>The defined instance under test</p>
      * <ul>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermission(String, String)}</li>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermissions(String, String...)}</li>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermissions(String, Operation, String...)}</li>
+     * <li>{@link UserSession#hasPermission(String, String)}</li>
+     * <li>{@link UserSession#hasPermissions(String, String...)}</li>
+     * <li>{@link UserSession#hasPermissions(String, Operation, String...)}</li>
      * </ul>
      * <p>
      * In order to check instances permissions
@@ -59,18 +61,18 @@ public @interface RequiresPermission {
     /**
      * <p>The permission values under test</p>
      * <ul>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermission(String, String)}</li>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermissions(String, String...)}</li>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermissions(String, Operation, String...)}</li>
+     * <li>{@link UserSession#hasPermission(String, String)}</li>
+     * <li>{@link UserSession#hasPermissions(String, String...)}</li>
+     * <li>{@link UserSession#hasPermissions(String, Operation, String...)}</li>
      * </ul>
      * <p>
      * In order to check resources permissions
      * </p>
      * Or
      * <ul>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermission(String, String)}</li>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermissions(String, String...)}</li>
-     * <li>{@link com.jcrochavera.jwt.authz.control.UserSession#hasPermissions(String, Operation, String...)}</li>
+     * <li>{@link UserSession#hasPermission(String, String)}</li>
+     * <li>{@link UserSession#hasPermissions(String, String...)}</li>
+     * <li>{@link UserSession#hasPermissions(String, Operation, String...)}</li>
      * </ul>
      * <p>
      * In order to check instances permissions

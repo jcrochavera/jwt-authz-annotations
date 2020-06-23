@@ -1,10 +1,10 @@
-package com.jcrochavera.jwt.authz.boundary;
+package com.github.jcrochavera.jwt.authz.boundary;
 
-import com.jcrochavera.jwt.authz.annotations.Operation;
-import com.jcrochavera.jwt.authz.annotations.RequiresPermission;
-import com.jcrochavera.jwt.authz.annotations.RequiresPermissions;
-import com.jcrochavera.jwt.authz.utils.BasicRoles;
-import com.jcrochavera.jwt.authz.utils.Permission;
+import com.github.jcrochavera.jwt.authz.annotations.Operation;
+import com.github.jcrochavera.jwt.authz.annotations.RequiresPermission;
+import com.github.jcrochavera.jwt.authz.annotations.RequiresPermissions;
+import com.github.jcrochavera.jwt.authz.utils.BasicRoles;
+import com.github.jcrochavera.jwt.authz.utils.Permission;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;

@@ -1,10 +1,10 @@
-package com.jcrochavera.jwt.authz.boundary;
+package com.github.jcrochavera.jwt.authz.boundary;
 
-import com.jcrochavera.jwt.authz.annotations.Operation;
-import com.jcrochavera.jwt.authz.annotations.RequiresPermission;
-import com.jcrochavera.jwt.authz.annotations.RequiresPermissions;
-import com.jcrochavera.jwt.authz.control.UserSession;
-import com.jcrochavera.jwt.authz.utils.AnnotationUtils;
+import com.github.jcrochavera.jwt.authz.annotations.RequiresPermission;
+import com.github.jcrochavera.jwt.authz.annotations.RequiresPermissions;
+import com.github.jcrochavera.jwt.authz.annotations.Operation;
+import com.github.jcrochavera.jwt.authz.control.UserSession;
+import com.github.jcrochavera.jwt.authz.utils.AnnotationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

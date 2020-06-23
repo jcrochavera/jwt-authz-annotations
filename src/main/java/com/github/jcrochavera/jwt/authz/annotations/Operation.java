@@ -1,4 +1,4 @@
-package com.jcrochavera.jwt.authz.annotations;
+package com.github.jcrochavera.jwt.authz.annotations;
 
 /**
  * Created by julio.rocha on 21/6/19.
