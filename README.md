@@ -2,6 +2,25 @@
 
 The main purpose of this library is to extend the MP-JWT specification using resource based tokens provided by Keycloak in the RPT token.
 
+### AuthorizationFilter
+AuthorizationFilter must be called in a filter providing ResourceInfo and ClientAuthz implementations. Example:
+```
+@Provider
+@Priority(Priorities.AUTHORIZATION)
+public class MyAuthorizationFilter implements ContainerRequestFilter {
+    @Context
+    ResourceInfo resourceInfo;
+    @Inject
+    ClientAuthzImpl clientAuth;
+
+    @Override
+    public void filter(ContainerRequestContext requestContext) throws IOException {
+        AuthorizationFilter af = new AuthorizationFilter(resourceInfo, clientAuth);
+        af.filter(requestContext);
+    }
+}
+```
+
 ### ClientAuthz
 ClientAuthz must be implemented with your required information. Example:
 ```

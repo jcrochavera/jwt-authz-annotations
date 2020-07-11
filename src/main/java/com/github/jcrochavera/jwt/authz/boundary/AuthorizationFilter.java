@@ -1,25 +1,19 @@
 package com.github.jcrochavera.jwt.authz.boundary;
 
+import com.github.jcrochavera.jwt.authz.annotations.Operation;
 import com.github.jcrochavera.jwt.authz.annotations.RequiresPermission;
 import com.github.jcrochavera.jwt.authz.annotations.RequiresPermissions;
-import com.github.jcrochavera.jwt.authz.annotations.Operation;
 import com.github.jcrochavera.jwt.authz.control.UserSession;
 import com.github.jcrochavera.jwt.authz.utils.AnnotationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Priority;
-import javax.inject.Inject;
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ResourceInfo;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.ext.Provider;
-import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
@@ -35,24 +29,28 @@ import java.util.Objects;
  * @author julio.rocha
  * @since 1.0.0
  */
-@Provider
-@Priority(Priorities.AUTHORIZATION)
-public class AuthorizationFilter implements ContainerRequestFilter {
+public class AuthorizationFilter {
     static Logger LOG = LoggerFactory.getLogger(AuthorizationFilter.class);
-    @Context
     ResourceInfo resourceInfo;
-    @Inject
     ClientAuthz clientAuth;
+
+    public AuthorizationFilter(ResourceInfo resourceInfo, ClientAuthz clientAuth) {
+        this.resourceInfo = resourceInfo;
+        this.clientAuth = clientAuth;
+    }
 
     /**
      * Executes algorithm when a method inside resource is annotated with {@link RequiresPermissions}
      *
      * @param requestContext incoming request
-     * @throws IOException if something wrong in the request happens i.e request canceled
      */
-    @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException {
-        AnnotationUtils au = new AnnotationUtils(resourceInfo.getResourceMethod().getAnnotations());
+    public void filter(ContainerRequestContext requestContext) {
+        Method resourceMethod = resourceInfo.getResourceMethod();
+        if (Objects.isNull(resourceMethod)) {
+            LOG.error("resourceMethod is null, filter will not be executed");
+            throw new IllegalStateException("resourceMethod is null, filter will not be executed");
+        }
+        AnnotationUtils au = new AnnotationUtils(resourceMethod.getAnnotations());
         if (au.isAnnotationPresent(RequiresPermissions.class)) {
             LOG.debug("'{}' requires permission evaluation", resourceInfo.getResourceClass());
             RequiresPermissions requiresPermissions = au.getAnnotation(RequiresPermissions.class);

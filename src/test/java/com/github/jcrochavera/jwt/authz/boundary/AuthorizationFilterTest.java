@@ -6,7 +6,9 @@ import com.github.jcrochavera.jwt.authz.utils.Permission;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
 import javax.annotation.security.RolesAllowed;
@@ -33,6 +35,21 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * @author julio.rocha
  */
 public class AuthorizationFilterTest {
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
+
+    @Test
+    public void nullResourceMethod() {
+        exceptionRule.expect(IllegalStateException.class);
+        exceptionRule.expectMessage("resourceMethod is null, filter will not be executed");
+
+        ContainerRequestContext containerRequestContext = Mockito.mock(ContainerRequestContext.class);
+        ResourceInfo resourceInfo = Mockito.mock(ResourceInfo.class);
+        ClientAuthzImpl clientAuth = new ClientAuthzImpl();
+        AuthorizationFilter af = new AuthorizationFilter(resourceInfo, clientAuth);
+        Mockito.when(af.resourceInfo.getResourceMethod()).thenReturn(null);
+        af.filter(containerRequestContext);
+    }
 
     @Test
     public void endpointWithoutProtection() throws Exception {
@@ -48,9 +65,7 @@ public class AuthorizationFilterTest {
 
         clientAuth.init();
 
-        AuthorizationFilter af = new AuthorizationFilter();
-        af.resourceInfo = resourceInfo;
-        af.clientAuth = clientAuth;
+        AuthorizationFilter af = new AuthorizationFilter(resourceInfo, clientAuth);
 
         ResourceTest rt = new ResourceTest();
         Method openEndpoint = rt.getClass().getMethod("openEndpoint");
@@ -77,9 +92,7 @@ public class AuthorizationFilterTest {
 
         clientAuth.init();
 
-        AuthorizationFilter af = Mockito.spy(new AuthorizationFilter());
-        af.resourceInfo = resourceInfo;
-        af.clientAuth = clientAuth;
+        AuthorizationFilter af = Mockito.spy(new AuthorizationFilter(resourceInfo, clientAuth));
 
         ResourceTest rt = new ResourceTest();
         Method helloTest1 = rt.getClass().getMethod("helloTest1", String.class);
@@ -117,9 +130,7 @@ public class AuthorizationFilterTest {
 
         clientAuth.init();
 
-        AuthorizationFilter af = new AuthorizationFilter();
-        af.resourceInfo = resourceInfo;
-        af.clientAuth = clientAuth;
+        AuthorizationFilter af = new AuthorizationFilter(resourceInfo, clientAuth);
 
         ResourceTest rt = new ResourceTest();
         Method helloTest = rt.getClass().getMethod("helloTest");
@@ -157,9 +168,7 @@ public class AuthorizationFilterTest {
         clientAuth.authorization = Json.createObjectBuilder().add("permissions", permissions).build();
         clientAuth.init();
 
-        AuthorizationFilter af = new AuthorizationFilter();
-        af.resourceInfo = resourceInfo;
-        af.clientAuth = clientAuth;
+        AuthorizationFilter af = new AuthorizationFilter(resourceInfo, clientAuth);
 
         ResourceTest rt = new ResourceTest();
         Method helloTest2 = rt.getClass().getMethod("helloTest2");
@@ -190,9 +199,7 @@ public class AuthorizationFilterTest {
         clientAuth.authorization = Json.createObjectBuilder().add("permissions", permissions).build();
         clientAuth.init();
 
-        AuthorizationFilter af = Mockito.spy(new AuthorizationFilter());
-        af.resourceInfo = resourceInfo;
-        af.clientAuth = clientAuth;
+        AuthorizationFilter af = Mockito.spy(new AuthorizationFilter(resourceInfo, clientAuth));
 
         ResourceTest rt = new ResourceTest();
         Method helloTest1 = rt.getClass().getMethod("helloTest1", String.class);
@@ -254,9 +261,7 @@ public class AuthorizationFilterTest {
         clientAuth.authorization = Json.createObjectBuilder().add("permissions", permissions).build();
         clientAuth.init();
 
-        AuthorizationFilter af = new AuthorizationFilter();
-        af.resourceInfo = resourceInfo;
-        af.clientAuth = clientAuth;
+        AuthorizationFilter af = new AuthorizationFilter(resourceInfo, clientAuth);
 
         ResourceTest rt = new ResourceTest();
         Method helloTest2 = rt.getClass().getMethod("helloTest2");
@@ -296,9 +301,7 @@ public class AuthorizationFilterTest {
         clientAuth.authorization = Json.createObjectBuilder().add("permissions", permissions).build();
         clientAuth.init();
 
-        AuthorizationFilter af = new AuthorizationFilter();
-        af.resourceInfo = resourceInfo;
-        af.clientAuth = clientAuth;
+        AuthorizationFilter af = new AuthorizationFilter(resourceInfo, clientAuth);
 
         ResourceTest rt = new ResourceTest();
         Method helloTest3 = rt.getClass().getMethod("helloTest3", String.class, String.class);

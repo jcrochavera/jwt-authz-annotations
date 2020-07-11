@@ -6,7 +6,7 @@
 
     <groupId>com.github.jcrochavera</groupId>
     <artifactId>jwt-authz-annotations</artifactId>
-    <version>0.5.0</version>
+    <version>0.6.0</version>
     <packaging>jar</packaging>
     <name>jwt-authz-annotations</name>
     <description>MP-JWT specification extension using resource based tokens provided by Keycloak in the RPT token
