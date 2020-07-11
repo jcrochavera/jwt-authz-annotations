@@ -201,7 +201,7 @@
         <connection>scm:git:git://github.com/jcrochavera/jwt-authz-annotations.git</connection>
         <developerConnection>scm:git:git://github.com/jcrochavera/jwt-authz-annotations.git</developerConnection>
         <url>scm:git:git://github.com/jcrochavera/jwt-authz-annotations.git</url>
-        <tag>0.5.0</tag>
+        <tag>0.6.0</tag>
     </scm>
     <distributionManagement>
         <snapshotRepository>
