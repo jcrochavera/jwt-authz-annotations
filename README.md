@@ -29,10 +29,10 @@ import UserSessionExtended;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.json.JsonObject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.json.JsonObject;
 import java.util.Objects;
 
 /**
@@ -100,7 +100,7 @@ public class ClientAuthzImpl implements ClientAuthz {
 ```
 Notice that also UserSession has been extended for this implementation:
 ```
-import javax.json.JsonObject;
+import jakarta.json.JsonObject;
 import java.util.Objects;
 
 /**
@@ -174,12 +174,12 @@ import RequiresPermissions;
 import BasicRoles;
 import Permission;
 
-import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 /**
  * Created by julio.rocha on 21/6/19.
