@@ -16,10 +16,10 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
  * import org.eclipse.microprofile.jwt.Claim;
  * import org.eclipse.microprofile.jwt.JsonWebToken;
  *
- * import javax.annotation.PostConstruct;
- * import javax.enterprise.context.RequestScoped;
- * import javax.inject.Inject;
- * import javax.json.JsonObject;
+ * import jakarta.annotation.PostConstruct;
+ * import jakarta.enterprise.context.RequestScoped;
+ * import jakarta.inject.Inject;
+ * import jakarta.json.JsonObject;
  * import java.util.Objects;
  * &#47;&#42;&#42;
  *  &#42; Created by julio.rocha on 21/6/19.

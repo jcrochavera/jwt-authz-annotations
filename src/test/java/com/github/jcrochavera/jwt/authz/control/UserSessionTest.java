@@ -1,11 +1,11 @@
 package com.github.jcrochavera.jwt.authz.control;
 
 import com.github.jcrochavera.jwt.authz.annotations.Operation;
+import jakarta.json.*;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
-import javax.json.*;
 import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;

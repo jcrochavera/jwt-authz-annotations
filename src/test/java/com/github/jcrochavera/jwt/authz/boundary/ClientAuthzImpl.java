@@ -2,13 +2,13 @@ package com.github.jcrochavera.jwt.authz.boundary;
 
 import com.github.jcrochavera.jwt.authz.control.UserSession;
 import com.github.jcrochavera.jwt.authz.control.UserSessionExtended;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.json.JsonObject;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.json.JsonObject;
 import java.util.Objects;
 
 /**
@@ -33,6 +33,7 @@ import java.util.Objects;
  * @author julio.rocha
  * @since 1.0.0
  */
+@SuppressWarnings("CdiInjectionPointsInspection")
 @RequestScoped
 public class ClientAuthzImpl implements ClientAuthz {
     @Inject

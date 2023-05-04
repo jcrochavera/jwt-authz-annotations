@@ -8,18 +8,19 @@ import com.github.jcrochavera.jwt.authz.utils.AnnotationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.ForbiddenException;
-import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ResourceInfo;
-import javax.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.ForbiddenException;
+import jakarta.ws.rs.NotAuthorizedException;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.ResourceInfo;
+import jakarta.ws.rs.core.MultivaluedMap;
+
 import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
  * Created by julio.rocha on 21/6/19.
  * <p>Checks annotated methods with {@link RequiresPermissions} in endpoints,
- * it returns {@link javax.ws.rs.core.Response.Status#FORBIDDEN} when: </p>
+ * it returns {@link jakarta.ws.rs.core.Response.Status#FORBIDDEN} when: </p>
  * <ul>
  *     <li>Session does not have resource permission for the defined annotation</li>
  *     <li>Session does not have resource and instance permission for the defined annotation</li>

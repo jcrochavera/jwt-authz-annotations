@@ -1,6 +1,7 @@
 package com.github.jcrochavera.jwt.authz.control;
 
-import javax.json.JsonObject;
+import jakarta.json.JsonObject;
+
 import java.util.Objects;
 
 /**

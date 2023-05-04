@@ -3,25 +3,24 @@ package com.github.jcrochavera.jwt.authz.boundary;
 import com.github.jcrochavera.jwt.authz.annotations.RequiresPermissions;
 import com.github.jcrochavera.jwt.authz.utils.AnnotationUtils;
 import com.github.jcrochavera.jwt.authz.utils.Permission;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObjectBuilder;
+import jakarta.ws.rs.ForbiddenException;
+import jakarta.ws.rs.NotAuthorizedException;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.ResourceInfo;
+import jakarta.ws.rs.core.MultivaluedHashMap;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.UriInfo;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Rule;
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
-import javax.annotation.security.RolesAllowed;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObjectBuilder;
-import javax.ws.rs.ForbiddenException;
-import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ResourceInfo;
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.UriInfo;
 import java.lang.reflect.Method;
 
 import static com.github.jcrochavera.jwt.authz.control.UserSessionTest.addResource;
@@ -35,20 +34,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * @author julio.rocha
  */
 public class AuthorizationFilterTest {
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
     @Test
     public void nullResourceMethod() {
-        exceptionRule.expect(IllegalStateException.class);
-        exceptionRule.expectMessage("resourceMethod is null, filter will not be executed");
-
-        ContainerRequestContext containerRequestContext = Mockito.mock(ContainerRequestContext.class);
-        ResourceInfo resourceInfo = Mockito.mock(ResourceInfo.class);
-        ClientAuthzImpl clientAuth = new ClientAuthzImpl();
-        AuthorizationFilter af = new AuthorizationFilter(resourceInfo, clientAuth);
-        Mockito.when(af.resourceInfo.getResourceMethod()).thenReturn(null);
-        af.filter(containerRequestContext);
+        String message = Assert.assertThrows(IllegalStateException.class, () -> {
+            ContainerRequestContext containerRequestContext = Mockito.mock(ContainerRequestContext.class);
+            ResourceInfo resourceInfo = Mockito.mock(ResourceInfo.class);
+            ClientAuthzImpl clientAuth = new ClientAuthzImpl();
+            AuthorizationFilter af = new AuthorizationFilter(resourceInfo, clientAuth);
+            Mockito.when(af.resourceInfo.getResourceMethod()).thenReturn(null);
+            af.filter(containerRequestContext);
+        }).getMessage();
+        assertThat(message, is("resourceMethod is null, filter will not be executed"));
     }
 
     @Test
